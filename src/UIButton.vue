@@ -3,7 +3,7 @@ interface Props {
   isFlip: boolean;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 </script>
 
 <template>

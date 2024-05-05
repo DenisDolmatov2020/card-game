@@ -6,14 +6,14 @@
           :key="n"
           :class="[
               'flip-box',
-              { 'flip-box--flipped': n === 2 && isFlipped },
-              { 'flip-box--middle': n === 2 }
+              { 'flip-box--flipped': n === 3 && isFlipped },
+              { 'flip-box--middle': n === 3 }
           ]"
       >
         <div class="flip-box__front">
         </div>
         <div
-            v-if="n === 2"
+            v-if="n === 3"
             class="flip-box__back"
         >
           <div class="flip-box__back-top">
