@@ -2,9 +2,13 @@
   <div class="container">
     <div class="flip-boxes">
       <div
-          v-for="n in 3"
+          v-for="n in 4"
           :key="n"
-          :class="['flip-box', { 'flip-box--flipped': n === 2 && isFlipped }]"
+          :class="[
+              'flip-box',
+              { 'flip-box--flipped': n === 2 && isFlipped },
+              { 'flip-box--middle': n === 2 }
+          ]"
       >
         <div class="flip-box__front">
         </div>
@@ -32,6 +36,7 @@
         </div>
       </div>
     </div>
+
     <UIButton
       :is-flip="isFlipped"
       @click="toggleFlip"
@@ -48,7 +53,6 @@ const isFlipped = ref(false);
 const toggleFlip = () => {
   isFlipped.value = !isFlipped.value;
 };
-
 </script>
 <style scoped>
 .container {
@@ -85,6 +89,12 @@ const toggleFlip = () => {
   transition: transform 1s;
 }
 
+.flip-box--middle {
+  position: absolute;
+  top: 245px;
+  z-index: 11;
+}
+
 .flip-box--flipped {
   transform: translateY(-100%);
 }
@@ -102,6 +112,17 @@ const toggleFlip = () => {
   transform-style: preserve-3d;
   background-position: center;
   color: red;
+}
+
+.flip-box--flipped .flip-box__back {
+  transform: rotateY(0deg);
+  z-index: 10;
+}
+
+.flip-box--flipped .flip-box__front {
+  transform: rotateY(180deg);
+  z-index: -1;
+  box-shadow: 0 0 10px black;
 }
 
 .flip-box__back {
@@ -122,7 +143,7 @@ const toggleFlip = () => {
 .flip-box__back-top,
 .flip-box__back-bottom {
   height: 1em;
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 .flip-box__back-bottom {
@@ -150,17 +171,7 @@ const toggleFlip = () => {
 }
 
 .flip-box__front {
-  z-index: 10;
-}
-
-.flip-box--flipped .flip-box__back {
-  transform: rotateY(0deg);
-  z-index: 10;
-}
-
-.flip-box--flipped .flip-box__front {
-  transform: rotateY(180deg);
-  z-index: -1;
-  box-shadow: 0 0 10px black;
+  z-index: 11;
+  box-shadow: 0 0 0 black;
 }
 </style>
